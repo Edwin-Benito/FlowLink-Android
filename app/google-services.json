@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "649658386919",
+    "firebase_url": "https://mensajeria-72219-default-rtdb.firebaseio.com",
+    "project_id": "mensajeria-72219",
+    "storage_bucket": "mensajeria-72219.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649658386919:android:9d179d0e5545fe7a1cd542",
+        "android_client_info": {
+          "package_name": "mx.castillo.edwin.mensajeria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649658386919-45nih6g1tc3o4tihgt851cdcgornr575.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.castillo.edwin.mensajeria",
+            "certificate_hash": "65b84a09609edf736c9b7608ca2476b75d79eab1"
+          }
+        },
+        {
+          "client_id": "649658386919-7vqa631tjr9hoevd772a68dp6k94lelh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrr6dVUsnX8mWXy1EZjhRlk8-Ef7nv33o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649658386919-7vqa631tjr9hoevd772a68dp6k94lelh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
