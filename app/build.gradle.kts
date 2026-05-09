@@ -1,5 +1,4 @@
 import java.util.Properties
-import org.gradle.api.GradleException
 
 plugins {
     alias(libs.plugins.android.application)
@@ -28,7 +27,7 @@ fun requiredSecret(name: String): String {
 val translationApiKey = requiredSecret("TRANSLATION_API_KEY")
 val facebookAppId = requiredSecret("FACEBOOK_APP_ID")
 val facebookClientToken = requiredSecret("FACEBOOK_CLIENT_TOKEN")
-val facebookLoginScheme = if (facebookAppId.isNotBlank()) "fb$facebookAppId" else ""
+val facebookLoginScheme = "fb$facebookAppId"
 
 android {
     namespace = "mx.castillo.edwin.mensajeria"
