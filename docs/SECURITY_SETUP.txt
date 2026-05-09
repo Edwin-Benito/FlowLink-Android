@@ -1,0 +1,22 @@
+FlowLink Android - Configuración de secretos
+
+1) Firebase
+- Usa app/google-services.example.json solo como referencia de estructura.
+- Descarga google-services.json desde Firebase Console > Project settings > Your apps y guárdalo como app/google-services.json (no lo subas al repo).
+
+2) Facebook
+- Configura en local.properties:
+  FACEBOOK_APP_ID=TU_FACEBOOK_APP_ID
+  FACEBOOK_CLIENT_TOKEN=TU_FACEBOOK_CLIENT_TOKEN
+- Actualiza la app de Facebook con el paquete y hashes SHA-1 correctos.
+
+3) Google Translation API
+- Configura TRANSLATION_API_KEY en local.properties.
+
+4) CI/CD
+- Genera app/google-services.json en tu pipeline de CI/CD usando secretos.
+- Exporta propiedades/variables seguras para FACEBOOK_APP_ID, FACEBOOK_CLIENT_TOKEN y TRANSLATION_API_KEY.
+
+5) Limpieza histórica y rotación
+- Revoca/rota las claves expuestas (Firebase API key, OAuth client, Facebook client token).
+- Reescribe el historial para eliminar app/google-services.json y cualquier clave expuesta antes de hacer público el repo.

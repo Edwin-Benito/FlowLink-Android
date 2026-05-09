@@ -15,6 +15,25 @@ val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
+/**
+ * Carga un secreto requerido desde local.properties (prioridad) o variables de entorno.
+ * Falla si no existe para evitar builds con credenciales inválidas.
+ */
+fun requiredSecret(name: String): String {
+    val value = localProperties.getProperty(name)?.trim().orEmpty()
+        .ifBlank { System.getenv(name)?.trim().orEmpty() }
+    if (value.isBlank()) {
+        throw GradleException(
+            "Falta el secreto requerido $name. Configúralo en ./local.properties o en variables de entorno."
+        )
+    }
+    return value
+}
+
+val translationApiKey = requiredSecret("TRANSLATION_API_KEY")
+val facebookAppId = requiredSecret("FACEBOOK_APP_ID")
+val facebookClientToken = requiredSecret("FACEBOOK_CLIENT_TOKEN")
+val facebookLoginScheme = "fb$facebookAppId"
 
 android {
     namespace = "mx.castillo.edwin.mensajeria"
@@ -26,6 +45,10 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+
+        resValue("string", "facebook_app_id", facebookAppId)
+        resValue("string", "facebook_client_token", facebookClientToken)
+        resValue("string", "fb_login_protocol_scheme", facebookLoginScheme)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,7 +64,7 @@ android {
             buildConfigField(
                 type = "String",
                 name = "TRANSLATION_API_KEY",
-                value = "\"${localProperties.getProperty("TRANSLATION_API_KEY")}\""
+                value = "\"$translationApiKey\""
             )
         }
 
@@ -50,7 +73,7 @@ android {
             buildConfigField(
                 type = "String",
                 name = "TRANSLATION_API_KEY",
-                value = "\"${localProperties.getProperty("TRANSLATION_API_KEY")}\""
+                value = "\"$translationApiKey\""
             )
         }
     }
