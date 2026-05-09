@@ -16,7 +16,15 @@ Aplicación de mensajería enfocada en privacidad con cifrado de extremo a extre
 ## Stack tecnológico
 - Kotlin + Jetpack Compose
 - AndroidX Navigation Compose
-- Firebase: Auth, Firestore, Realtime Database, Storage, Messaging, Remote Config, App Check, Crashlytics
+- Firebase:
+  - Auth
+  - Firestore
+  - Realtime Database
+  - Storage
+  - Messaging
+  - Remote Config
+  - App Check
+  - Crashlytics
 - Google Sign-In y Facebook Login
 - Google Cloud Translation API
 - Google Tink (cifrado)
