@@ -31,7 +31,7 @@ Aplicación de mensajería enfocada en privacidad con cifrado de extremo a extre
 
 ## Requisitos
 - Android Studio (recomendado)
-- JDK 11
+- JDK 17+
 - Android SDK 29+
 - Proyecto de Firebase configurado
 
@@ -44,7 +44,7 @@ Aplicación de mensajería enfocada en privacidad con cifrado de extremo a extre
 3. Descarga tu `google-services.json` desde Firebase Console y colócalo en `app/google-services.json`.
 4. (Opcional) Configura la app de Facebook con el paquete y los SHA-1 correctos.
 
-Para más detalles sobre secretos y seguridad, revisa `docs/SECURITY_SETUP.txt`.
+Para más detalles sobre secretos y seguridad, revisa [`docs/SECURITY_SETUP.txt`](docs/SECURITY_SETUP.txt).
 
 ## Ejecución
 Puedes ejecutar la app desde Android Studio o con Gradle:
