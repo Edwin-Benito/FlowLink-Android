@@ -15,6 +15,9 @@ val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
+/**
+ * Carga un secreto requerido desde local.properties o variables de entorno y falla si no existe.
+ */
 fun requiredSecret(name: String): String {
     val value = localProperties.getProperty(name)?.trim().orEmpty()
         .ifBlank { System.getenv(name)?.trim().orEmpty() }
