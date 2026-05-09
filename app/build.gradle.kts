@@ -1,4 +1,5 @@
 import java.util.Properties
+import org.gradle.api.GradleException
 
 plugins {
     alias(libs.plugins.android.application)
@@ -15,9 +16,18 @@ val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
-val translationApiKey = localProperties.getProperty("TRANSLATION_API_KEY") ?: ""
-val facebookAppId = localProperties.getProperty("FACEBOOK_APP_ID") ?: ""
-val facebookClientToken = localProperties.getProperty("FACEBOOK_CLIENT_TOKEN") ?: ""
+fun requiredSecret(name: String): String {
+    val value = localProperties.getProperty(name)?.trim().orEmpty()
+        .ifBlank { System.getenv(name)?.trim().orEmpty() }
+    if (value.isBlank()) {
+        throw GradleException("Falta el secreto requerido $name. Configúralo en local.properties o en variables de entorno.")
+    }
+    return value
+}
+
+val translationApiKey = requiredSecret("TRANSLATION_API_KEY")
+val facebookAppId = requiredSecret("FACEBOOK_APP_ID")
+val facebookClientToken = requiredSecret("FACEBOOK_CLIENT_TOKEN")
 val facebookLoginScheme = if (facebookAppId.isNotBlank()) "fb$facebookAppId" else ""
 
 android {

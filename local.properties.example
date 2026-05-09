@@ -1,4 +1,4 @@
-# Ruta del SDK de Android (opcional si ANDROID_SDK_ROOT está configurado)
+# Ruta del SDK de Android (opcional si ANDROID_HOME/ANDROID_SDK_ROOT está configurado)
 # sdk.dir=/ruta/a/Android/Sdk
 
 TRANSLATION_API_KEY=TU_TRANSLATION_API_KEY

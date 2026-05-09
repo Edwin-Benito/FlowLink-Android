@@ -1,8 +1,8 @@
 FlowLink Android - Configuración de secretos
 
 1) Firebase
-- Copia app/google-services.example.json a app/google-services.json (no lo subas al repo).
-- Descarga google-services.json desde Firebase Console > Project settings > Your apps.
+- Usa app/google-services.example.json solo como referencia de estructura.
+- Descarga google-services.json desde Firebase Console > Project settings > Your apps y guárdalo como app/google-services.json (no lo subas al repo).
 
 2) Facebook
 - Configura en local.properties:
