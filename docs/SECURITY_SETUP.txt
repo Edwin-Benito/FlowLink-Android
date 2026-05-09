@@ -14,7 +14,7 @@ FlowLink Android - Configuración de secretos
 - Configura TRANSLATION_API_KEY en local.properties.
 
 4) CI/CD
-- Genera app/google-services.json en el job usando secretos.
+- Genera app/google-services.json en tu pipeline de CI/CD usando secretos.
 - Exporta propiedades/variables seguras para FACEBOOK_APP_ID, FACEBOOK_CLIENT_TOKEN y TRANSLATION_API_KEY.
 
 5) Limpieza histórica y rotación

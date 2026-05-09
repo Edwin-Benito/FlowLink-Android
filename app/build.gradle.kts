@@ -15,14 +15,21 @@ val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
+val requireSecrets = gradle.startParameter.taskNames.any { taskName ->
+    listOf("assemble", "bundle", "build", "compile", "install", "lint", "test").any {
+        taskName.contains(it, ignoreCase = true)
+    }
+}
 /**
  * Carga un secreto requerido desde local.properties o variables de entorno y falla si no existe.
  */
 fun requiredSecret(name: String): String {
     val value = localProperties.getProperty(name)?.trim().orEmpty()
         .ifBlank { System.getenv(name)?.trim().orEmpty() }
-    if (value.isBlank()) {
-        throw GradleException("Falta el secreto requerido $name. Configúralo en local.properties o en variables de entorno.")
+    if (requireSecrets && value.isBlank()) {
+        throw GradleException(
+            "Falta el secreto requerido $name. Configúralo en ./local.properties o en variables de entorno."
+        )
     }
     return value
 }
