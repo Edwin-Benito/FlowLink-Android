@@ -16,8 +16,9 @@ if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
 val requireSecrets = gradle.startParameter.taskNames.any { taskName ->
-    listOf("assemble", "bundle", "build", "compile", "install", "lint", "test").any {
-        taskName.contains(it, ignoreCase = true)
+    val normalizedTask = taskName.substringAfterLast(":").lowercase()
+    listOf("assemble", "bundle", "build", "compile", "connected", "install", "lint", "package", "test").any {
+        normalizedTask.startsWith(it)
     }
 }
 /**
