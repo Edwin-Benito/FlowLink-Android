@@ -15,27 +15,17 @@ val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
-val requireSecrets = gradle.startParameter.taskNames.any { taskName ->
-    val normalizedTask = taskName.substringAfterLast(":").lowercase()
-    listOf("assemble", "bundle", "build", "compile", "connected", "install", "lint", "package", "test").any {
-        normalizedTask.startsWith(it)
-    }
-}
 /**
  * Carga un secreto requerido desde local.properties (prioridad) o variables de entorno.
- * La validación solo aplica cuando se ejecutan tareas de build/lint/test/assemble/bundle/package.
- * Si no aplica, devuelve un marcador MISSING_* para evitar valores vacíos.
+ * Falla si no existe para evitar builds con credenciales inválidas.
  */
 fun requiredSecret(name: String): String {
     val value = localProperties.getProperty(name)?.trim().orEmpty()
         .ifBlank { System.getenv(name)?.trim().orEmpty() }
     if (value.isBlank()) {
-        if (requireSecrets) {
-            throw GradleException(
-                "Falta el secreto requerido $name. Configúralo en ./local.properties o en variables de entorno."
-            )
-        }
-        return "MISSING_$name"
+        throw GradleException(
+            "Falta el secreto requerido $name. Configúralo en ./local.properties o en variables de entorno."
+        )
     }
     return value
 }
