@@ -24,14 +24,18 @@ val requireSecrets = gradle.startParameter.taskNames.any { taskName ->
 /**
  * Carga un secreto requerido desde local.properties (prioridad) o variables de entorno.
  * La validación solo aplica cuando se ejecutan tareas de build/lint/test/assemble/bundle/package.
+ * Si no aplica, devuelve un marcador MISSING_* para evitar valores vacíos.
  */
 fun requiredSecret(name: String): String {
     val value = localProperties.getProperty(name)?.trim().orEmpty()
         .ifBlank { System.getenv(name)?.trim().orEmpty() }
-    if (requireSecrets && value.isBlank()) {
-        throw GradleException(
-            "Falta el secreto requerido $name. Configúralo en ./local.properties o en variables de entorno."
-        )
+    if (value.isBlank()) {
+        if (requireSecrets) {
+            throw GradleException(
+                "Falta el secreto requerido $name. Configúralo en ./local.properties o en variables de entorno."
+            )
+        }
+        return "MISSING_$name"
     }
     return value
 }
