@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">Mensajeria</string>
-    <string name="default_web_client_id">649658386919-45nih6g1tc3o4tihgt851cdcgornr575.apps.googleusercontent.com</string>
-
-    <string name="facebook_app_id">1846991062564513</string>
-    <string name="facebook_client_token">bbc0f8b471c74542d4644d258e7f9fbc</string>
-    <string name="fb_login_protocol_scheme">fb1846991062564513</string>
 
     <string name="default_notification_channel_id" translatable="false">new_messages_channel</string>
 
