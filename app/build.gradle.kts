@@ -22,7 +22,8 @@ val requireSecrets = gradle.startParameter.taskNames.any { taskName ->
     }
 }
 /**
- * Carga un secreto requerido desde local.properties o variables de entorno y falla si no existe.
+ * Carga un secreto requerido desde local.properties (prioridad) o variables de entorno.
+ * La validación solo aplica cuando se ejecutan tareas de build/lint/test/assemble/bundle/package.
  */
 fun requiredSecret(name: String): String {
     val value = localProperties.getProperty(name)?.trim().orEmpty()
